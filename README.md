@@ -9,8 +9,9 @@ Flip flop é um componente usado para armazenar um bit de dado e um circuito de 
 ## 2. Flip Flop JK
 
 O Flip Flop JK veio para solucionar um problema do Flip Flop RS. Mas que problema era esse?
+Para descobrir o problema, vamos primeiro ver um pouco do funcionamento do RS, que deu base ao JK.
 
-### 2.1. Pega a visão do RS 
+### 2.1. Entendendo primeiro o flip flop RS 
 
 <p align="center" width="100%">
   <img src="https://www.electronicshub.org/wp-content/uploads/2015/06/SR-flip-flop-symbol.jpg">
@@ -21,6 +22,22 @@ RESET: Desliga a saída Q -> 0, consequentemente ~Q -> 1
 
 Vamos analisar todas as combinações possíveis através da tabela-verdade? (Desconsiderando o clock por enquanto)
 
+| R | S | Q | ~Q|
+| :-|:-:|:-:| :-:| 
+| 0 | 0 | Qa| Qa| 
+| 0 | 1 | 1 | 0 | 
+| 1 | 0 | 0 | 1 |
+| 1 | 1 |Inválido|Inválido|
 
-| Left-aligned | Center-aligned | Right-aligned |
-| :---         |     :---:      |          ---: |
+Note que:
+<ul>
+  <li>Quando R e S forem 0, nada é mandado pra saída Q, portanto ela permanecerá no seu estado anterior (Qa)</li>
+  <li>Quando somente S for 1, ele mandará 1 para saída Q</li>
+  <li>Quando somente R for 1, ele mandará 0 para saída Q</li>
+  <li>No entanto, R e S não podem estar ligados ao mesmo tempo</li>
+</ul>
+
+Neste último caso, a opção é contraditória já que não tem como você ligar e desligar a saída ao mesmo tempo. Além disso, o flip flop RS não possui nenhum tipo de tratamento para essa possibilidade, é por esse motivo que o flip flop JK se faz presente.
+
+
+### 2.2. Agora sim o JK

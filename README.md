@@ -24,7 +24,7 @@ RESET: Desliga a saída Q -> 0, consequentemente ~Q -> 1
 
 Vamos analisar todas as combinações possíveis através da tabela-verdade? (Desconsiderando o clock por enquanto)<br>
 Qa = Q anterior<br>
-Qf = Q final 
+Qf = Q futuro 
 
 | R | S | Qa | Qf| ~Qf|
 | :-|:-:|:-:| :-:| :-:|
@@ -82,8 +82,8 @@ Aqui o J funciona como o S (set) e o K como o R (reset). Desse modo J muda a sa�
 | J | K | Q | ~Q |
 |:-:|:-:|:-:|:-:|
 | 0 | 0 | Qa| ~Qa| 
-| 0 | 1 | 1 | 0 | 
-| 1 | 0 | 0 | 1 |
+| 0 | 1 | 0 | 1 | 
+| 1 | 0 | 1 | 0 |
 | 1 | 1 |~Qa| Qa|
 
 A tabela-verdade do RS e do JK são bem parecidas, no entanto, na última linha se nota um diferencial. Ao setar as entradas J e K para 1 ao mesmo tempo, as saídas ficará fazendo "trocas" e entrará no seu estado de comutação. Para entender como isso acontece, veremos o flip flop JK representado por portas NAND.
@@ -124,5 +124,36 @@ A frequência indica quantas vezes em um determinado intervalo de tempo o circui
 
 
 ## 3. Exemplo
-Vamos fazer um breve exemplo de um contador de 0 até 3 para que você perceba a utilidade do flip flop JK.
+Vamos fazer um breve exemplo de um contador de 3 até 1 para que você perceba a utilidade do flip flop JK. 
+
+O primeiro passo para fazer isso seria se perguntar quantos bits são necessários para contar até 3. Para isso você pode pensar que o número 3 em binário é igual a 11 que por sua vez, possui dois dígitos. Outra possibilidade seria pensar que 2 elevado a 2 é igual a 4, ou seja, 4 possibilidades incluindo o zero, sendo elas 0, 1, 2 e 3. 
+
+Sabendo disso, temos apenas as saídas pois sabemos que queremos contar de 1 até 3, mas como descobrimos as entradas a partir das saídas? 
+Há uma tabela de auxílio para isso, mas vamos nos perguntar de onde ela veio. Veja:
+| Q | Q+1 | J | K |
+|:-:| :-: |:-:|:-:|
+| 0 |  0  | 0 | X |
+| 0 |  1  | 1 | X |
+| 1 |  0  | X | 1 |
+| 1 |  1  | X | 0 |
+
+Por favor, não decore essa tabela mas aprenda a chegar nela. 
+Veja que 0 (Q anterior = Q) deve continuar a ser 0 (Q futuro = Q+1), 0 deve passar a ser 1, 1 deve passar a ser 0 e 1 deve continuar a ser 1. Visto essas possibilidades de transição, vamos inserir as entradas, J e K com o auxílio da tabela-verdade do flip flop JK. 
+
+0 -> 0 (basta observar nas linhas 1 e 2, o que elas tem em comum? J = 0)<br>
+  <ol>
+    <li>Olhe na coluna Q e veja as possibilidades de Q ser igual a 0</li>
+    <li>Perceba que há 3 possibilidades, linha 1 e 2.</li>
+    <li>A linha 4 será desconsiderada, pois o Qa = 0 e como ele deve ser negado, a saída de Q passará a ser 1.</li>
+  </ol>
+0 -> 1 (basta observar nas linhas 3 e 4, o que elas tem em comum? J = 1)<br>
+1 -> 0 (basta observar nas linhas 2 e 4, o que elas tem em comum? K = 1)<br>
+1 -> 1 (basta observar nas linhas 1 e 3, o que elas tem em comum? K = 0)<br>
+
+| J | K | Q |  |
+|:-:|:-:|:-:| :-: |
+| 0 | 0 | Qa| -> Linha 1 |
+| 0 | 1 | 0 | -> Linha 2 |
+| 1 | 0 | 1 | -> Linha 3 |
+| 1 | 1 |~Qa| -> Linha 4 |
 

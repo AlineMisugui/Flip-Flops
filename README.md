@@ -72,4 +72,29 @@ Aqui o J funciona como o S (set) e o K como o R (reset). Desse modo J muda a sa�
 | 1 | 0 | 0 | 1 |
 | 1 | 1 |~Qa| Qa|
 
-A tabela-verdade do RS e do JK são bem parecidas, no entanto, na última linha se nota um diferencial. Ao setar as entradas J e K para 1, a saída Q faz o que 
+A tabela-verdade do RS e do JK são bem parecidas, no entanto, na última linha se nota um diferencial. Ao setar as entradas J e K para 1 ao mesmo tempo, as saídas ficará fazendo "trocas" e entrará no seu estado de comutação. Para entender como isso acontece, veremos o flip flop JK representado por portas NAND.
+
+<p align="center" width="100&">
+  <img src="https://ajpeletroinfo.com.br/wp-content/uploads/2020/01/flip-3.png">
+</p>
+
+Perceba que o JK são duas portas NAND acopladas em um flip-flop RS. Ainda não percebeu? <a href="https://prnt.sc/x6mG8FwyZz2P" target="_blank" rel="external">Veja aqui</a>
+
+Vamos fazer a possibilidade de J=1 e K=1 para entender como é possível:
+<ol>
+  <li>Fazer o NAND entre J e CLK e ~Q => Q</li>
+  <li>Fazer o NAND entre Q e ~Q = > 1</li>
+  <li>Fazer o NAND entre K e CLK e Q => ~Q</li>
+  <li>Fazer o NAND entre Q e ~Q => 1</li>
+ </ol>
+ 
+ Até o momento temos isso: <a href="https://prnt.sc/eJ07irffNO-4">Veja aqui</a>
+ 
+ A partir disso, o ciclo irá se realimentar e as saídas com os resultados 1 irá fazer o <a href="https://prnt.sc/pVhuGPnNInUp">seguinte percurso</a>, portanto, 1 será uma das entradas dos NANDs. Desse modo:
+ 
+ <ol>
+  <li>Fazer NAND entre Q e 1 => Q</li>
+  <li>Fazer NAND entre ~Q e 1 => ~Q</li>
+ </ol>
+ 
+ Desta forma, é possível compreender que não há contradição nesse tipo de flip-flop quando J e K são ambos 1.

@@ -128,8 +128,9 @@ Vamos fazer um breve exemplo de um contador de 3 até 1 para que você perceba a
 
 O primeiro passo para fazer isso seria se perguntar quantos bits são necessários para contar até 3. Para isso você pode pensar que o número 3 em binário é igual a 11 que por sua vez, possui dois dígitos. Outra possibilidade seria pensar que 2 elevado a 2 é igual a 4, ou seja, 4 possibilidades incluindo o zero, sendo elas 0, 1, 2 e 3. 
 
-Sabendo disso, temos apenas as saídas pois sabemos que queremos contar de 1 até 3, mas como descobrimos as entradas a partir das saídas? 
+Sabendo disso, temos apenas as saídas pois sabemos que queremos contar de 3 até 1, mas como descobrimos as entradas a partir das saídas? 
 Há uma tabela de auxílio para isso, mas vamos nos perguntar de onde ela veio. Veja:
+
 | Q | Q+1 | J | K |
 |:-:| :-: |:-:|:-:|
 | 0 |  0  | 0 | X |
@@ -157,3 +158,71 @@ Veja que 0 (Q anterior = Q) deve continuar a ser 0 (Q futuro = Q+1), 0 deve pass
 | 1 | 0 | 1 | -> Linha 3 |
 | 1 | 1 |~Qa| -> Linha 4 |
 
+Até o momento, descobrimos que precisamos de 2 bits. Considerando que cada flip-flop armazena 1 bit, precisamos de 2 flip-flops (2 saídas).<br>
+Vamos denominar a primeira saída de Q0 e a segunda de Q1. Para descobrir as entradas, precisamos também do Q0+1 e do Q1+1.<br>
+Com as saídas Q0 e Q1 vamos contar de 0 até 3, já que é a saída que desejamos. Nos Qs futuros vamos colocar o próximo elemento da contagem (ex: após o 3 é 2, após o 2 é 1 e após o 1 é 0)
+
+| Q1 | Q0 | Q1+1 | Q0+1 | |
+|:-: |:-: | :-:  | :-:  | :-:|
+| 1  | 1  |  1   |  0   |  -> S4  |
+| 1  | 0  |  0   |  1   |  -> S3  |
+| 0  | 1  |  0   |  0   |  -> S2  |
+| 0  | 0  |  1   |  1   |  -> S1  |
+
+Encontradas e ordenadas as saídas, agora é a vez de encontrar as entradas JK usando aquela tabela de referência para encontrar as entradas de cada uma das saídas Q0 e Q1. Vamos primeiro fazer a de Q1:
+
+| Q1 | Q1+1 | J | K |
+|:-:| :-: |:-:|:-:|
+| 1 |  1  | X | 0 |
+| 1 |  0  | X | 1 |
+| 0 |  0  | 0 | X |
+| 0 |  1  | 1 | X |
+
+Sabendo disso, vamos construir um mapa de karnaugh para a saída J e outro para a saída K, respeitando as ordens de saída S1, S2, S3 e S4.
+
+|   |~Q0| Q0|
+|:-:|:-:|:-:|
+|~Q1| 1 | 0 |
+| Q1| X | X |
+Temos que: J1 = ~Q0
+
+|   |~Q0| Q0|
+|:-:|:-:|:-:|
+|~Q1| X | X |
+| Q1| 1 | 0 |
+Temos que: K1 = ~Q0
+
+Vamos descobrir as entradas de Q0 agora: 
+
+| Q0 | Q0+1 | J | K |
+|:-:| :-: |:-:|:-:|
+| 1 |  0  | X | 1 |
+| 0 |  1  | 1 | X |
+| 1 |  0  | X | 1 |
+| 0 |  1  | 1 | X |
+
+E colocá-las nos mapas de karnaugh:
+
+|   |~Q0| Q0|
+|:-:|:-:|:-:|
+|~Q1| 1 | X |
+| Q1| 1 | X |
+Temos que: J0 = 1
+
+|   |~Q0| Q0|
+|:-:|:-:|:-:|
+|~Q1| X | 1 |
+| Q1| X | 1 |
+Temos que: K0 = 1
+
+Pegando as simplificações de todas as entradas: <br>
+<ul>
+  <li>J1 = ~Q0</li>
+  <li>J0 = 1</li>
+  <li>K1 = ~Q0</li>
+  <li>K0 = 1</li>
+</ul>
+
+Agora vamos para o Logisim construir o circuito.<br>
+Para isso colocamos dois flip flops um com rótulo Q0 e outro Q1. No Q0 se encontram as entradas J0 e K0 e no Q1, J1 e K1.<br>
+Agora é só ligar as entradas conforme descobrimos de acordo com as simplificações e o circuito fica <a href="https://prnt.sc/WIcjnfEcexaV">assim</a>

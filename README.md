@@ -22,14 +22,28 @@ Para descobrir o problema, vamos primeiro ver um pouco do funcionamento do RS, q
 SET: Liga a saída Q -> 1, consequentemente ~Q -> 0</br>
 RESET: Desliga a saída Q -> 0, consequentemente ~Q -> 1
 
-Vamos analisar todas as combinações possíveis através da tabela-verdade? (Desconsiderando o clock por enquanto)
+Vamos analisar todas as combinações possíveis através da tabela-verdade? (Desconsiderando o clock por enquanto)<br>
+Qa = Q anterior<br>
+Qf = Q final 
 
-| R | S | Q | ~Q|
-| :-|:-:|:-:| :-:| 
-| 0 | 0 | Qa| Qa| 
-| 0 | 1 | 1 | 0 | 
-| 1 | 0 | 0 | 1 |
-| 1 | 1 |Inválido|Inválido|
+| R | S | Qa | Qf| ~Qf|
+| :-|:-:|:-:| :-:| :-:|
+| 0 | 0 | 0 | 0 | 1 |
+| 0 | 0 | 1 | 1 | 0 |
+| 0 | 1 | 0 | 1 | 0 |
+| 0 | 1 | 1 | 1 | 0 |
+| 1 | 0 | 0 | 0 | 1 |
+| 1 | 0 | 1 | 0 | 1 |
+| 1 | 1 | 0 |Inválido| 
+| 1 | 1 | 1 |Inválido| 
+
+Podemos simplificar a tabela de modo que: 
+| R | S | Q |
+|:-:|:-:|:-:|
+| 0 | 0 | Qa|
+| 0 | 1 | 1 |
+| 1 | 0 | 0 |
+| 1 | 1 |nválido|
 
 Note que:
 <ul>
@@ -98,3 +112,17 @@ Vamos fazer a possibilidade de J=1 e K=1 para entender como é possível:
  </ol>
  
  Desta forma, é possível compreender que não há contradição nesse tipo de flip-flop quando J e K são ambos 1.
+
+
+### 2.3. E o clock? 🕓
+O sinal de clock é composto por ondas quadradas de 0s e 1s sendo esses variados de forma rítmica. Quando essas ondas estão em 1, é indicado a possibilidade de troca de estado das saídas. 
+
+A frequência indica quantas vezes em um determinado intervalo de tempo o circuito pode fazer uma troca, então quanto maior a frequência, maior a velocidade das trocas.
+<p align="center" width="100%">
+  <img src="https://th.bing.com/th/id/R.75a1fb268ccfe118b66cf3390fedb3e0?rik=NfU%2bL1fmJaRugg&riu=http%3a%2f%2fwiki.foz.ifpr.edu.br%2fwiki%2fimages%2fc%2fcb%2fPulsosClock.png&ehk=pNhb%2bGuETn%2b0EkcNUrXveL7a74T6Zo0qciC28bQWA4s%3d&risl=&pid=ImgRaw&r=0">
+</p> 
+
+
+## 3. Exemplo
+Vamos fazer um breve exemplo de um contador de 0 até 3 para que você perceba a utilidade do flip flop JK.
+

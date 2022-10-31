@@ -184,12 +184,14 @@ Sabendo disso, vamos construir um mapa de karnaugh para a saída J e outro para 
 |:-:|:-:|:-:|
 |~Q1| 1 | 0 |
 | Q1| X | X |
+
 Temos que: J1 = ~Q0
 
 |   |~Q0| Q0|
 |:-:|:-:|:-:|
 |~Q1| X | X |
 | Q1| 1 | 0 |
+
 Temos que: K1 = ~Q0
 
 Vamos descobrir as entradas de Q0 agora: 
@@ -207,12 +209,14 @@ E colocá-las nos mapas de karnaugh:
 |:-:|:-:|:-:|
 |~Q1| 1 | X |
 | Q1| 1 | X |
+
 Temos que: J0 = 1
 
 |   |~Q0| Q0|
 |:-:|:-:|:-:|
 |~Q1| X | 1 |
 | Q1| X | 1 |
+
 Temos que: K0 = 1
 
 Pegando as simplificações de todas as entradas: <br>
@@ -226,3 +230,6 @@ Pegando as simplificações de todas as entradas: <br>
 Agora vamos para o Logisim construir o circuito.<br>
 Para isso colocamos dois flip flops um com rótulo Q0 e outro Q1. No Q0 se encontram as entradas J0 e K0 e no Q1, J1 e K1.<br>
 Agora é só ligar as entradas conforme descobrimos de acordo com as simplificações e o circuito fica <a href="https://prnt.sc/WIcjnfEcexaV">assim</a>
+
+
+Ainda podemos adicionar codificadores e decodificadores para mostrar o número em um display, no entanto, termino as explicações aqui, qualquer coisa pode apontar um issue que eu tento responder.
